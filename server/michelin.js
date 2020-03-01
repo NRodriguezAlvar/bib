@@ -1,24 +1,32 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 
-/**
- * Parse webpage restaurant
- * @param  {String} data - html response
- * @return {Object} restaurant
- */
+var links = [];
+var res = [];
 const parse = data => {
   const $ = cheerio.load(data);
-  const name = $('.section-main h2.restaurant-details__heading--title').text();
-  const experience = $('#experience-section > ul > li:nth-child(2)').text();
+  var item = [];
+  var item2 = [];
+  var item3 = [];
 
-  return {name, experience};
+  $('.card__menu-image a').each((i, element) =>
+  {
+    item.push($(element).attr('aria-label').substring(5));
+  });
+  $('.card__menu-footer--price').each((i, element) =>
+  {
+    item2.push($(element).text().trim());
+  });
+  $('.card__menu-footer--location').each((i, element) =>
+  {
+    item3.push($(element).text().trim());
+  });
+  for(var index = 0; index < item.length; index++)  {
+    res.push({'Name':item[index], 'Cuisine':item2[index], 'Lieu':item3[index]})
+  }
+  return {res};
 };
 
-/**
- * Scrape a given restaurant url
- * @param  {String}  url
- * @return {Object} restaurant
- */
 module.exports.scrapeRestaurant = async url => {
   const response = await axios(url);
   const {data, status} = response;
@@ -32,10 +40,6 @@ module.exports.scrapeRestaurant = async url => {
   return null;
 };
 
-/**
- * Get all France located Bib Gourmand restaurants
- * @return {Array} restaurants
- */
 module.exports.get = () => {
   return [];
 };
