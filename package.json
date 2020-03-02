@@ -6,9 +6,11 @@
   "repository": "git@github.com:92bondstreet/bib.git",
   "dependencies": {
     "axios": "^0.19.2",
+    "bootstrap": "^4.4.1",
     "cheerio": "^1.0.0-rc.3",
     "fs": "0.0.1-security",
-    "iconv-lite": "^0.5.1"
+    "iconv-lite": "^0.5.1",
+    "react-bootstrap": "^1.0.0-beta.17"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"
