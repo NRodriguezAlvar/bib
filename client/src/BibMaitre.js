@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, useState} from 'react';
 import BibMaitreRes from './assets/allBibMaitre';
 import './Border.css';
 import styled from 'styled-components';
 import rest from './assets/bibmaitre.jpg';
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import { faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const Styles = styled.div`
@@ -23,10 +24,17 @@ const Styles = styled.div`
 class BibMaitre extends Component {
 	constructor(props) {
 		super(props);
-		this.handleClick = this.handleClick.bind(this);
+		this.state = {
+			restaurants: BibMaitreRes
+		};
 	}
-	handleClick(n){
-		alert("Le tri n'a pas abouti");
+	handleSortClickAsc(by){
+		const sortedRes = this.state.restaurants.sort((a,b) => a[by] > b[by]);
+		this.setState({'restaurants': sortedRes});
+	}
+	handleSortClickDesc(by){
+		const sortedRes = this.state.restaurants.sort((a,b) => a[by] < b[by]);
+		this.setState({'restaurants': sortedRes});
 	}
 	render() {
 		return (
@@ -37,8 +45,10 @@ class BibMaitre extends Component {
 				<table id="mytable" style = {{marginLeft:"auto", marginRight:"auto"}}>
 					<thead className='border' style = {{width: "400px", margin:"auto"}}>
 						<tr>
-							<th>Nom <button onClick={this.handleClick}><FontAwesomeIcon icon={faCaretDown}/></button></th>
-							<th>Lieu <button onClick={this.handleClick}><FontAwesomeIcon icon={faCaretDown}/></button></th>
+							<th>Nom <button onClick={() => this.handleSortClickAsc('Name')}><FontAwesomeIcon icon={faCaretUp}/></button>
+							<button onClick={() => this.handleSortClickDesc('Name')}><FontAwesomeIcon icon={faCaretDown}/></button></th>
+							<th>Lieu <button onClick={() => this.handleSortClickAsc('Lieu')}><FontAwesomeIcon icon={faCaretUp}/></button>
+							<button onClick={() => this.handleSortClickDesc('Lieu')}><FontAwesomeIcon icon={faCaretDown}/></button></th>
 						</tr>
 					</thead>
 					<tbody>
