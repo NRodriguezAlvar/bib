@@ -1,19 +1,16 @@
 import React, { Component } from "react";
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl';
-import Button from 'react-bootstrap/Form';
 import styled from 'styled-components';
 
 const Styles = styled.div`
     .navbar{
-		background-color: #222;
+		background-color: #BF3D30;
     }
     .navbar-brand, .navbar-nav .nav-link{
-        color: #bbb;
+        color: white;
         &:hover{
-            color: white;
+            color: grey;
         }
     }
 	.nav-link {
@@ -23,11 +20,8 @@ const Styles = styled.div`
 		text-align: center;
 		padding: 14px 16px;
 		text-decoration: none;
-		marginBottom: 20px;
 	}
 `;
-
-
 
 export const NavigationBar = () =>(
 	<Styles>
